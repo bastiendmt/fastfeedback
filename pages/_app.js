@@ -10,15 +10,13 @@ const GlobalStyle = ({ children }) => {
       <CSSReset />
       <Global
         styles={css`
-          htlm {
-            min-width: 360px;
-            scroll-behaviour: smooth;
+          html {
+            scroll-behavior: smooth;
           }
-
+          
           #__next {
             display: flex;
             flex-direction: column;
-            align-items: center;
             min-height: 100vh;
           }
         `}
