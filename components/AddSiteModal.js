@@ -23,9 +23,8 @@ const AddSiteModal = () => {
   const { handleSubmit, register } = useForm();
 
   const onCreateSite = (values) => {
-    // createSite(values);
-    console.log(values);
-    // onClose();
+    createSite(values);
+    onClose();
   };
 
   return (
