@@ -1,29 +1,44 @@
-import { useRef } from 'react';
-import { useForm } from 'react-hook-form';
+import { useAuth } from '@/lib/auth';
+import { createSite } from '@/lib/db';
 import {
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalBody,
-  ModalCloseButton,
+  Button,
   FormControl,
   FormLabel,
-  Button,
   Input,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
   useDisclosure,
+  useToast,
 } from '@chakra-ui/react';
-
-import { createSite } from '@/lib/db';
+import { useRef } from 'react';
+import { useForm } from 'react-hook-form';
 
 const AddSiteModal = () => {
   const initialRef = useRef();
+  const toast = useToast();
+  const auth = useAuth();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { handleSubmit, register } = useForm();
 
-  const onCreateSite = (values) => {
-    createSite(values);
+  const onCreateSite = ({ site, url }) => {
+    createSite({
+      authorId: auth.user.uid,
+      createAt: new Date().toISOString(),
+      site,
+      url,
+    });
+    toast({
+      title: 'Success!',
+      description: "We've added your site.",
+      status: 'success',
+      duration: 5000,
+      isClosable: true,
+    });
     onClose();
   };
 
@@ -44,7 +59,7 @@ const AddSiteModal = () => {
                 ref={initialRef}
                 placeholder="My site"
                 name="site"
-                {...register('Site', {
+                {...register('site', {
                   required: true,
                 })}
               />
@@ -55,7 +70,7 @@ const AddSiteModal = () => {
               <Input
                 placeholder="https://website.com"
                 name="url"
-                {...register('Url', {
+                {...register('url', {
                   required: true,
                 })}
               />
