@@ -1,14 +1,18 @@
 import { useAuth } from '@/lib/auth';
 import { LogoIcon } from '@/styles/logo';
 import {
-  Avatar, Box,
+  Avatar,
+  Box,
   Breadcrumb,
   BreadcrumbItem,
-  BreadcrumbLink, Button,
-  Flex, Heading, Icon, Link
+  BreadcrumbLink,
+  Button,
+  Flex,
+  Heading,
+  Icon,
+  Link,
 } from '@chakra-ui/react';
 import React from 'react';
-
 
 const DashboardShell = ({ children }) => {
   const { user, signout } = useAuth();
@@ -27,15 +31,17 @@ const DashboardShell = ({ children }) => {
           px={8}
         >
           <Flex>
-            <LogoIcon name="logo" size="16px" mr={8}/>
+            <LogoIcon name="logo" size="16px" mr={8} />
             <Link mr={4}>Sites</Link>
             <Link>Feedback</Link>
           </Flex>
           <Flex justifyContent="center" alignItems="center">
-            <Button variant="ghost" mr={2} onClick={() => signout()}>
-              Log Out
-            </Button>
-            <Avatar size="sm" src={user.photoUrl} />
+            {user && (
+              <Button variant="ghost" mr={2} onClick={() => signout()}>
+                Log Out
+              </Button>
+            )}
+            <Avatar size="sm" src={user?.photoUrl} />
           </Flex>
         </Flex>
       </Flex>
@@ -54,7 +60,7 @@ const DashboardShell = ({ children }) => {
             _hover={{ bg: 'gray.700' }}
             _active={{
               bg: 'gray.800',
-              transform: 'scale(0.95)'
+              transform: 'scale(0.95)',
             }}
           >
             + Add Site
