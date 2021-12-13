@@ -1,14 +1,17 @@
-import { Box, Button, Code, Flex, Heading, Icon, Text } from '@chakra-ui/react';
-import Head from 'next/head';
-import { useAuth } from '@/lib/auth';
+import DashboardShell from '@/components/DashboardShell';
 import EmptyState from '@/components/EmptyState';
 import SiteTableSkeleton from '@/components/SiteTableSkeleton';
-import DashboardShell from '@/components/DashboardShell';
+import { useAuth } from '@/lib/auth';
+import fetcher from '@/utils/fetcher';
+import useSWR from 'swr';
 
 const Dashboard = () => {
   const auth = useAuth();
+  const { data, error } = useSWR('/api/sites', fetcher);
 
-  if (!auth.user) {
+  console.log(data);
+
+  if (!data) {
     return (
       <DashboardShell>
         <SiteTableSkeleton />
