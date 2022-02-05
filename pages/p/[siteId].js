@@ -4,25 +4,29 @@ import { createFeedback } from '@/lib/db';
 import { getAllFeedback, getAllSites } from '@/lib/db-admin';
 import { Box, Button, FormControl, FormLabel, Input } from '@chakra-ui/react';
 import { useRouter } from 'next/dist/client/router';
-import { useRef } from 'react';
+import { useState } from 'react';
 
 const SiteFeedback = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
-  const inputEl = useRef(null);
+  const [allFeedback, setAllfeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
+    const text = e.target.elements.comment;
+
     const newFeedback = {
       author: auth.user.name,
       authorId: auth.user.uid,
       siteId: router.query.siteId,
-      text: inputEl.current.value,
+      text,
       createdAt: new Date().toISOString(),
       provider: auth.user.provider,
       status: 'pending',
+      rating: 5,
     };
 
+    setAllfeedback([newFeedback, ...allFeedback]);
     createFeedback(newFeedback);
   };
 
@@ -37,13 +41,13 @@ const SiteFeedback = ({ initialFeedback }) => {
       <Box as="form" onSubmit={onSubmit}>
         <FormControl my={8}>
           <FormLabel htmlFor="comment">Comment</FormLabel>
-          <Input ref={inputEl} type="comment" id="comment" />
+          <Input type="comment" id="comment" />
           <Button mt={2} type="submit" fontWeight="medium">
             Add Comment
           </Button>
         </FormControl>
       </Box>
-      {initialFeedback.map((feedback) => (
+      {allFeedback.map((feedback) => (
         <Feedback key={feedback.id} {...feedback} />
       ))}
     </Box>
@@ -53,7 +57,7 @@ const SiteFeedback = ({ initialFeedback }) => {
 export async function getStaticProps(context) {
   const siteId = context.params.sideId;
   console.log(siteId);
-  const feedback = await getAllFeedback('5jSD2rpqNynzVd2UCL67');
+  const { feedback } = await getAllFeedback('5jSD2rpqNynzVd2UCL67');
 
   return {
     props: {
@@ -63,7 +67,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const sites = await getAllSites();
+  const { sites } = await getAllSites();
 
   const paths = sites.map((site) => ({
     params: {
