@@ -31,7 +31,7 @@ const AddSiteModal = ({ children }) => {
   const onCreateSite = ({ site, url }) => {
     const newSite = {
       authorId: auth.user.uid,
-      createAt: new Date().toISOString(),
+      createdAt: new Date().toISOString(),
       site,
       url,
     };
