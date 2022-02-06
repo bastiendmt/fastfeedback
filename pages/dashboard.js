@@ -7,8 +7,11 @@ import fetcher from '@/utils/fetcher';
 import useSWR from 'swr';
 
 const Dashboard = () => {
-  const auth = useAuth();
-  const { data, error } = useSWR('/api/sites', fetcher);
+  const { user } = useAuth();
+  const { data, error } = useSWR(
+    user ? ['/api/sites', user.token] : null,
+    fetcher
+  );
 
   console.log(data);
 

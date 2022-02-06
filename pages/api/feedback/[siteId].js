@@ -1,5 +1,4 @@
 import { getAllFeedback } from '@/lib/db-admin';
-import { resolveMotionValue } from 'framer-motion';
 
 const sites = async (req, res) => {
   const siteId = req.query.siteId;

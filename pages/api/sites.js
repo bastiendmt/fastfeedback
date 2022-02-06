@@ -1,7 +1,8 @@
 import { getAllSites } from '@/lib/db-admin';
-import db from '@/lib/firebase-admin';
+import { db } from '@/lib/firebase-admin';
 
-const sites = async (_, res) => {
+const sites = async (req, res) => {
+  const token = req.headers.token;
   const { sites, error } = await getAllSites();
 
   if (error) {
