@@ -56,7 +56,6 @@ const SiteFeedback = ({ initialFeedback }) => {
 
 export async function getStaticProps(context) {
   const siteId = context.params.sideId;
-  console.log(siteId);
   const { feedback } = await getAllFeedback('5jSD2rpqNynzVd2UCL67');
 
   return {
