@@ -1,11 +1,11 @@
-import { getAllSites, getUserSites } from '@/lib/db-admin';
+import { getUserSites } from '@/lib/db-admin';
 import { auth } from '@/lib/firebase-admin';
 
 const sites = async (req, res) => {
   try {
     const token = req.headers.token;
     const { uid } = await auth.verifyIdToken(token);
-    const { sites, error } = await getUserSites(uid);
+    const { sites } = await getUserSites(uid);
 
     res.status(200).json({ sites });
   } catch (error) {

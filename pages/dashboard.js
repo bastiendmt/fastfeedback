@@ -15,7 +15,7 @@ const Dashboard = () => {
 
   console.log('data: ', data);
 
-  if (!data) {
+  if (!data || data.error) {
     return (
       <DashboardShell>
         <SiteTableSkeleton />
