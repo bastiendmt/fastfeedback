@@ -13,7 +13,7 @@ const Dashboard = () => {
     fetcher
   );
 
-  console.log(data);
+  console.log('data: ', data);
 
   if (!data) {
     return (
