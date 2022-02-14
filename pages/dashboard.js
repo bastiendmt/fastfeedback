@@ -13,8 +13,6 @@ const Dashboard = () => {
     fetcher
   );
 
-  console.log('data: ', data);
-
   if (!data || data.error) {
     return (
       <DashboardShell>
