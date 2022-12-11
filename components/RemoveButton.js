@@ -7,13 +7,15 @@ import {
   AlertDialogOverlay,
   Button,
   DeleteIcon,
+  SearchIcon,
   IconButton,
   useDisclosure,
+  Icon,
 } from '@chakra-ui/react';
 import React from 'react';
-import { deleteFeedback } from '@/lib/db';
 import { mutate } from 'swr';
 import { useAuth } from '@/lib/auth';
+import { deleteFeedback } from '@/lib/db';
 
 const RemoveButton = ({ feedbackId }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,7 +42,8 @@ const RemoveButton = ({ feedbackId }) => {
     <>
       <IconButton
         aria-label="Delete feedback"
-        icon={<DeleteIcon />}
+        bgColor={'red.100'}
+        icon="delete"
         variant="ghost"
         onClick={onOpen}
       />
