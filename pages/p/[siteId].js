@@ -9,7 +9,7 @@ import { useState } from 'react';
 const SiteFeedback = ({ initialFeedback }) => {
   const auth = useAuth();
   const router = useRouter();
-  const [allFeedback, setAllfeedback] = useState(initialFeedback);
+  const [allFeedback, setAllFeedback] = useState(initialFeedback);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ const SiteFeedback = ({ initialFeedback }) => {
       rating: 5,
     };
 
-    setAllfeedback([newFeedback, ...allFeedback]);
+    setAllFeedback([newFeedback, ...allFeedback]);
     createFeedback(newFeedback);
   };
 

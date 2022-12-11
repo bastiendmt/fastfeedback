@@ -1,6 +1,18 @@
-import { Box, Button, Code, Flex, Heading, Icon, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Code,
+  Flex,
+  Heading,
+  Icon,
+  Link,
+  Stack,
+  Text,
+} from '@chakra-ui/react';
 import Head from 'next/head';
 import { useAuth } from '@/lib/auth';
+import { GithubIcon } from '@/styles/github';
+import { GoogleIcon } from '@/styles/google';
 
 const Home = () => {
   const auth = useAuth();
@@ -9,6 +21,7 @@ const Home = () => {
     <Flex
       as="main"
       direction="column"
+      margin="0 auto"
       align="center"
       justify="center"
       maxW="300px"
@@ -32,13 +45,74 @@ const Home = () => {
           fill="currentColor"
         />
       </Icon>
+      <Text fontSize="lg" py={4}>
+        <Text as="span" fontWeight="bold" display="inline">
+          Fast Feedback
+        </Text>
+        {' was built as part of '}
+        <Link
+          href="https://react2025.com"
+          isExternal
+          textDecoration="underline"
+        >
+          React 2025
+        </Link>
+        {`. It's the easiest way to add comments or reviews to your static site. Try it out by leaving a comment below. After the comment is approved, it will display below.`}
+      </Text>
 
       {auth?.user ? (
-        <Button onClick={(e) => auth.signout()}>Sign out</Button>
-      ) : (
-        <Button mt={4} size="sm" onClick={(e) => auth.signInWithGitHub()}>
-          Sign in
+        <Button
+          as="a"
+          href="/dashboard"
+          backgroundColor="white"
+          color="gray.900"
+          fontWeight="medium"
+          mt={4}
+          size="lg"
+          _hover={{ bg: 'gray.100' }}
+          _active={{
+            bg: 'gray.100',
+            transform: 'scale(0.95)',
+          }}
+        >
+          View Dashboard
         </Button>
+      ) : (
+        <Stack>
+          <Button
+            onClick={(e) => auth.signInWithGitHub()}
+            backgroundColor="gray.900"
+            color="white"
+            fontWeight="medium"
+            leftIcon={<GithubIcon />}
+            mt={4}
+            size="lg"
+            _hover={{ bg: 'gray.700' }}
+            _active={{
+              bg: 'gray.800',
+              transform: 'scale(0.95)',
+            }}
+          >
+            Sign in with Github
+          </Button>
+          <Button
+            onClick={(e) => auth.signInWithGoogle()}
+            backgroundColor="white"
+            color="gray.900"
+            variant={'outline'}
+            fontWeight="medium"
+            leftIcon={<GoogleIcon />}
+            mt={4}
+            size="lg"
+            _hover={{ bg: 'gray.100' }}
+            _active={{
+              bg: 'gray.100',
+              transform: 'scale(0.95)',
+            }}
+          >
+            Sign in with Google
+          </Button>
+        </Stack>
       )}
     </Flex>
   );
