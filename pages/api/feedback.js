@@ -1,5 +1,6 @@
 import { getUserFeedback } from '@/lib/db-admin';
 import { auth } from '@/lib/firebase-admin';
+import { formatObjectsKeys, logger } from '@/utils/logger';
 
 const feedback = async (req, res) => {
   try {
@@ -9,6 +10,19 @@ const feedback = async (req, res) => {
 
     res.status(200).json({ feedback });
   } catch (error) {
+    logger.error(
+      {
+        request: {
+          headers: formatObjectsKeys(req.headers),
+          url: req.url,
+          method: req.method,
+        },
+        response: {
+          statusCode: res.statusCode,
+        },
+      },
+      error.message
+    );
     res.status(500).json({ error });
   }
 };
