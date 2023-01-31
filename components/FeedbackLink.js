@@ -1,4 +1,4 @@
-import { Flex, Link } from '@chakra-ui/core';
+import { Flex, Link } from '@chakra-ui/react';
 
 export default function FeedbackLink({ paths }) {
   return (
@@ -11,7 +11,6 @@ export default function FeedbackLink({ paths }) {
       direction={['column', 'row']}
     >
       <Link
-        color={linkColor[colorMode]}
         fontWeight="bold"
         fontSize="sm"
         href={`/site/${paths.join('/')}`}
