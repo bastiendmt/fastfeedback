@@ -14,7 +14,7 @@ const SEO = {
     description,
     images: [
       {
-        url: 'fastfeedback-three-nu.vercel.app',
+        url: 'fastfeedback-three-nu.vercel.app/op.png',
         alt: title,
         width: 1280,
         height: 720,
