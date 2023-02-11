@@ -42,10 +42,10 @@ const Dashboard = () => {
   );
 };
 
-const DashboardPage = () => {
+const DashboardPage = () => (
   <Page name="Dashboard" path="/dashboard">
     <Dashboard />
-  </Page>;
-};
+  </Page>
+);
 
 export default DashboardPage;

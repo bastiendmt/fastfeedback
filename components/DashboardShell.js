@@ -5,10 +5,6 @@ import NextLink from 'next/link';
 
 const DashboardShell = ({ children }) => {
   const { user, signout } = useAuth();
-  const path = window.location.pathname;
-  const name = path.charAt(0).toUpperCase + name.slice(1);
-  const title = `Fast Feedback - ${name}`;
-  const url = `https://fastfeedback.io${path}`;
 
   return (
     <Box backgroundColor="gray.100" h="100vh">
