@@ -1,5 +1,6 @@
 import DashboardShell from '@/components/DashboardShell';
 import EmptyState from '@/components/EmptyState';
+import Page from '@/components/Page';
 import SiteTable from '@/components/SiteTable';
 import SiteTableHeader from '@/components/SiteTableHeader';
 import SiteTableSkeleton from '@/components/SiteTableSkeleton';
@@ -23,12 +24,28 @@ const Dashboard = () => {
     );
   }
 
+  if (data.sites.length) {
+    return (
+      <DashboardShell>
+        <SiteTableHeader />
+        <SiteTable sites={data.sites} />
+      </DashboardShell>
+    );
+  }
+
   return (
     <DashboardShell>
+      {/* UpdateEmptyState */}
       <SiteTableHeader />
       {data.sites.length ? <SiteTable sites={data.sites} /> : <EmptyState />}
     </DashboardShell>
   );
 };
 
-export default Dashboard;
+const DashboardPage = () => {
+  <Page name="Dashboard" path="/dashboard">
+    <Dashboard />
+  </Page>;
+};
+
+export default DashboardPage;
