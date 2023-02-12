@@ -1,3 +1,4 @@
+import DashboardShell from '@/components/DashboardShell';
 import { Feedback } from '@/components/Feedback';
 import { useAuth } from '@/lib/auth';
 import { createFeedback } from '@/lib/db';
@@ -32,32 +33,34 @@ const SiteFeedback = ({ initialFeedback }) => {
   };
 
   return (
-    <Box
-      display="flex"
-      flexDirection="column"
-      width="full"
-      maxWidth="700"
-      margin="0 auto"
-    >
-      <Box as="form" onSubmit={onSubmit}>
-        <FormControl my={8}>
-          <FormLabel htmlFor="comment">Comment</FormLabel>
-          <Input ref={inputEl} type="comment" id="comment" />
-          <Button
-            mt={2}
-            type="submit"
-            fontWeight="medium"
-            disabled={router.isFallback}
-          >
-            Add Comment
-          </Button>
-        </FormControl>
+    <DashboardShell>
+      <Box
+        display="flex"
+        flexDirection="column"
+        width="full"
+        maxWidth="700"
+        margin="0 auto"
+      >
+        <Box as="form" onSubmit={onSubmit}>
+          <FormControl my={8}>
+            <FormLabel htmlFor="comment">Comment</FormLabel>
+            <Input ref={inputEl} type="comment" id="comment" />
+            <Button
+              mt={2}
+              type="submit"
+              fontWeight="medium"
+              disabled={router.isFallback}
+            >
+              Add Comment
+            </Button>
+          </FormControl>
+        </Box>
+        {allFeedback &&
+          allFeedback.map((feedback) => (
+            <Feedback key={feedback.id} {...feedback} />
+          ))}
       </Box>
-      {allFeedback &&
-        allFeedback.map((feedback) => (
-          <Feedback key={feedback.id} {...feedback} />
-        ))}
-    </Box>
+    </DashboardShell>
   );
 };
 
